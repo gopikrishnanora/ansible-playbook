@@ -1,0 +1,16 @@
+---
+ - name: This playbook is all about installing the Apache and start the services.
+   hosts: all
+   remote_user: nora_gopikrishna
+   become: yes
+
+   tasks:
+
+        - name: Installing Apache server
+          yum: name=httpd state=latest
+
+        - name: Copying the index html page
+          copy: src=/home/nora_gopikrishna/index.html dest=/var/www/html/index.html owner=nora_gopikrishna group=nora_gopikrishna mode=755
+
+        - name: Start the Apache server
+          service: name=httpd state=started
